@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  p Введите слоги через запятую
+  form(action="/words" method="post")
+    input(
+      type='text'
+      name='data'
+    )
+    button(type='submit') Отправить

@@ -1,0 +1,18 @@
+extends layout
+
+block content
+    if domains.length > 0
+        table(style='width:100%', border='1')
+            tr
+                th Домен
+                th Цена
+            each domain in domains
+                tr
+                    td=domain.title
+                    td=domain.price
+
+    else
+        div There is no free domains
+
+
+
