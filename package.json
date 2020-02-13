@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon dist/bin/www",
+    "start": "npm run build && node dist/bin/www.js",
+    "dev": "nodemon dist/bin/www.js",
     "build": "babel ./src --out-dir dist",
     "clean": "rm -rf ./dist",
     "lint": "npx eslint . --fix"

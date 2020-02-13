@@ -6,5 +6,5 @@ export default (address) => new Promise((resolve, reject) => {
       reject(err);
     }
     resolve(data);
-  })
+  });
 });
