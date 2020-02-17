@@ -1,8 +1,13 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.main {
+    padding: 20pt;
 }
 
-a {
-  color: #00B7FF;
+.pointer {
+    cursor: pointer;
+}
+
+.close-icon {
+    background: url("/images/cross.svg") no-repeat;
+    width: 20px;
+    height: 20px;
 }

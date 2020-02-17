@@ -2,6 +2,7 @@ import express from 'express';
 import {
   checkDns, fetchData, generateWords, transformIncomingData,
 } from '../utils';
+import { promises as fs } from 'fs';
 
 const router = express.Router();
 const nicUrl = 'https://www.nic.ru/app/v1/get/services';
@@ -38,6 +39,10 @@ router.post('/words', (req, res) => {
       const message = 'Ooops, something was wrong. Try again.';
       res.render('error', { title: 'Error', message, error });
     });
+});
+
+router.post('/save', async (req, res) => {
+  const { body } = req;
 });
 
 export default router;

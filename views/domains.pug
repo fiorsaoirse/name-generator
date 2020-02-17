@@ -1,18 +1,43 @@
 extends layout
 
 block content
+    script(type="text/javascript").
+      domainsBrowser = !{JSON.stringify(domains)};
+      function goToMain() {
+        window.location.href = '/';
+      }
+      function saveToFile() {
+        fetch('/save', {
+          method: 'POST',
+          cache: 'no-cache',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(domainsBrowser),
+        }).then(function() {
+          console.log('success');
+        });
+      }
+
+    button(type='button' class='btn btn-outline-primary mb-1' onclick='goToMain()') Назад
     if domains.length > 0
-        table(style='width:100%', border='1')
-            tr
-                th Домен
-                th Цена
+        table(class='table table-bordered')
+            thead(class='thead-light')
+                tr
+                    th(scope='col') Домен
+                    th(scope='col') Цена
+            tbody
             each domain in domains
                 tr
                     td=domain.title
                     td=domain.price
 
+        button(type='button'
+            class='btn btn-success'
+            onclick='saveToFile()'
+        ) Сохранить в файл
     else
-        div There is no free domains
+        div(class='alert alert-danger' role='alert') Свободных доменов на эти сочетания нет!
 
 
 

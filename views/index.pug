@@ -1,10 +1,28 @@
 extends layout
 
 block content
-  p Введите слоги через запятую
-  form(action="/words" method="post")
-    input(
-      type='text'
-      name='data'
-    )
-    button(type='submit') Отправить
+    script(type="text/javascript").
+      function clear() {
+        console.log('clear');
+        const search = document.getElementById('search');
+        search.innerText = '';
+      }
+
+    div(class='container')
+        div(class='row justify-content-md-center')
+            div(class='col')
+                form(action='/words' method='post' class='w-100')
+                    label(for='search' class='mb-1') Введите слоги через запятую:
+                    div(class='input-group')
+                        div(class='input-group-prepend')
+                            span(class='input-group-text icon')
+                                span(class='close-icon pointer' onclick='clear()')
+                        textarea(
+                            id='search'
+                            name='data'
+                            class='form-control'
+                        )
+                    button(
+                        class='btn btn-outline-secondary mt-2'
+                        type='submit'
+                    ) Отправить
