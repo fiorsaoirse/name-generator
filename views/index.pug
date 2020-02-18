@@ -2,10 +2,9 @@ extends layout
 
 block content
     script(type="text/javascript").
-      function clear() {
-        console.log('clear');
-        const search = document.getElementById('search');
-        search.innerText = '';
+      function reset() {
+        const textarea = document.getElementById('search');
+        textarea.value = '';
       }
 
     div(class='container')
@@ -16,7 +15,7 @@ block content
                     div(class='input-group')
                         div(class='input-group-prepend')
                             span(class='input-group-text icon')
-                                span(class='close-icon pointer' onclick='clear()')
+                                span(class='close-icon pointer' onclick='reset()')
                         textarea(
                             id='search'
                             name='data'

@@ -2,7 +2,6 @@ import express from 'express';
 import {
   checkDns, fetchData, generateWords, transformIncomingData,
 } from '../utils';
-import { promises as fs } from 'fs';
 
 const router = express.Router();
 const nicUrl = 'https://www.nic.ru/app/v1/get/services';
@@ -16,11 +15,13 @@ router.post('/words', (req, res) => {
   const transformedData = transformIncomingData(data);
   const generatedData = generateWords(transformedData);
   const promisesArray = generatedData.map((genData) => checkDns(genData));
+
   Promise.allSettled(promisesArray)
     .then((result) => result.filter((pr) => pr.status === 'rejected'))
     .then((successful) => successful.map((pr) => pr.reason.hostname))
     .then((mapped) => {
       console.log('DNS DOMAINS CHECKED ', mapped);
+      console.log(`Domains count is ${mapped.length}`);
       return mapped;
     })
     .then((mapped) => mapped.map((domain) => fetchData(domain, nicUrl)))
@@ -41,7 +42,7 @@ router.post('/words', (req, res) => {
     });
 });
 
-router.post('/save', async (req, res) => {
+router.post('/save', (req, res) => {
   const { body } = req;
 });
 

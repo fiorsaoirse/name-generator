@@ -5,6 +5,7 @@ import dns from './promisified-dns';
 // returns array<string>
 export const transformIncomingData = (string) => string.split(',').map((e) => e.trim());
 
+// @param array<string>
 export const generateWords = (array) => array.reduce((acc, element, index) => {
   const iter = array.reduce((iAcc, el, ind) => {
     if (ind !== index) {
@@ -55,8 +56,8 @@ export const fetchData = (word, url) => {
       const [domain] = data.services;
       return domain;
     })
-    .catch((ex) => {
-      console.error(ex);
-      throw new Error(ex);
+    .catch((e) => {
+      console.log(`There is an error, message is: ${e.message}`);
+      throw e;
     });
 };

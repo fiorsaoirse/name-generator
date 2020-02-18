@@ -4,6 +4,7 @@ import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import favicon from 'serve-favicon';
 
 import routes from './routes/index';
 
@@ -20,7 +21,6 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(dir, 'public')));
 
-
 const corsOptions = {
   origin: '*',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
@@ -31,15 +31,13 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.options('*', cors());
 
-app.use('/favicon.ico', (req, res, next) => next());
+app.use(favicon(path.join(dir, 'public', 'images', 'favicon.ico')));
 
 // add routes
 app.use('/', routes);
 
 // add bootstrap
-app.use('/bootstrap', express.static(path.join(dir + '/node_modules/bootstrap/dist/css')));
-
-// / error handlers
+app.use('/bootstrap', express.static(path.join(dir, 'node_modules', 'bootstrap', 'dist', 'css')));
 
 // / catch 404 and forwarding to error handler
 app.use((req, res, next) => {
